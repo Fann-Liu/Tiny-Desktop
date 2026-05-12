@@ -399,6 +399,8 @@ class WindowNavigator:
         self.canvas.bind("<MouseWheel>", self.on_mousewheel)
         self.canvas.bind("<Button-4>", lambda event: self.canvas.yview_scroll(-1, "units"))
         self.canvas.bind("<Button-5>", lambda event: self.canvas.yview_scroll(1, "units"))
+        self.canvas.bind("<Enter>", lambda event: self.canvas.focus_set())
+        self.root.bind_all("<MouseWheel>", self.on_mousewheel)
 
         for widget in (self.header, self.title_label, self.count_label):
             widget.bind("<ButtonPress-1>", self.start_drag)
@@ -666,7 +668,23 @@ class WindowNavigator:
         self.canvas.configure(cursor="hand2")
 
     def on_mousewheel(self, event):
-        self.canvas.yview_scroll(int(-event.delta / 120), "units")
+        if not self.pointer_inside_canvas():
+            return
+
+        if event.delta == 0:
+            return
+
+        direction = -1 if event.delta > 0 else 1
+        self.canvas.yview_scroll(direction, "units")
+
+    def pointer_inside_canvas(self):
+        x = self.canvas.winfo_pointerx()
+        y = self.canvas.winfo_pointery()
+        left = self.canvas.winfo_rootx()
+        top = self.canvas.winfo_rooty()
+        right = left + self.canvas.winfo_width()
+        bottom = top + self.canvas.winfo_height()
+        return left <= x <= right and top <= y <= bottom
 
     def open_selected(self, event=None):
         if not self.rows:
