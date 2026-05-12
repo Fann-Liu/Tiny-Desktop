@@ -1,6 +1,5 @@
 import subprocess
 import threading
-import time
 import tkinter as tk
 
 
@@ -442,7 +441,6 @@ class WindowNavigator:
             return
 
         self.refresh_in_progress = True
-        self.set_status("Updating…")
         self.refresh_button.configure(state=tk.DISABLED)
 
         worker = threading.Thread(target=self.read_windows_worker, daemon=True)
@@ -476,7 +474,6 @@ class WindowNavigator:
 
         self.draw_rows()
         self.count_label.configure(text=f"{len(group_windows(self.windows))} apps")
-        self.set_status(f"Updated {time.strftime('%H:%M')}")
 
     def redraw_soon(self, event=None):
         if event and event.widget is not self.root:

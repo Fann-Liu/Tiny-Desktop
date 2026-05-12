@@ -17,7 +17,7 @@
 如果想从源码运行：
 
 ```bash
-cd window-navigator
+cd "tiny desktop"
 python3 tiny_desktop.py
 ```
 
