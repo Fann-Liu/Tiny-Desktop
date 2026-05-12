@@ -18,7 +18,7 @@
 
 ```bash
 cd window-navigator
-python3 window_navigator.py
+python3 tiny_desktop.py
 ```
 
 窗口会按 App 折叠显示当前 macOS 上已打开窗口的名称，也会显示已经在运行但当前没有窗口的 App。点击右上角 `↻` 可以手动刷新列表；程序也会自动刷新。
@@ -51,7 +51,7 @@ System Settings → Privacy & Security → Accessibility
 1. 打开 System Settings → Privacy & Security → Accessibility
 2. 给 Terminal / iTerm / Python 授权
 3. 关闭并重新打开 Terminal
-4. 重新运行 `python3 window_navigator.py`
+4. 重新运行 `python3 tiny_desktop.py`
 
 ## 已知限制
 
